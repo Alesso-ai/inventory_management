@@ -85,9 +85,10 @@
             <x-responsive-nav-link :href="route('boxes.index')" :active="request()->routeIs('boxes.index')">
                 {{ __('Boxes') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('loans.index')" :active="request()->routeIs('loans.index')">
+            <x-nav-link :href="route('loans.index')" :active="request()->routeIs('loans.index')">
                 {{ __('Loans') }}
-            </x-responsive-nav-link>
+            </x-nav-link>
+           
         </div>
 
         <!-- Responsive Settings Options -->
