@@ -33,4 +33,10 @@ Route::resource('boxes', BoxController::class) ->middleware('auth');
 //loans
 Route::resource('loans', LoanController::class) ->middleware('auth');
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/loans', [LoanController::class, 'index'])->name('loans.index');
+    Route::put('/loans/{loan}/return', [LoanController::class, 'returnLoan'])->name('loans.return'); 
+});
+
 require __DIR__.'/auth.php';

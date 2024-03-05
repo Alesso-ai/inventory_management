@@ -5,71 +5,50 @@ namespace App\Http\Controllers;
 use App\Models\Loan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Box;
 
 class LoanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('loans.index', [
-            'loans' => Loan::all()
-        ]);
-    }
-    
+        $user = Auth::user();
+        $loans = Loan::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
+        return view('loans.index', compact('loans'));
+    }
+
+
     public function create()
     {
-        //
+        
+    
+        $boxes = Box::all(); 
+    
+        return view('loans.create', compact('boxes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Loan $loan)
     {
-        //
+
+        return view('loans.show', compact('loan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Loan $loan)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Loan $loan)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Loan $loan)
+
+    public function returnLoan(Loan $loan)
     {
-        //
-    }
-    
-    public function return(Loan $loan)
-    {
-        $loan->return();
-        return redirect()->route('loans.index');
+        // Verificar si el préstamo no ha sido devuelto
+        if (!$loan->returned) {
+            $loan->return_date = now();
+            $loan->returned = true;
+            $loan->save();
+        }
+
+        return redirect()->route('loans.index')->with('success', 'Loan returned successfully.');
     }
 }

@@ -85,9 +85,12 @@ class BoxController extends Controller
      */
     public function destroy(Box $box)
     {
+        // Actualiza los items relacionados estableciendo 'box_id' en null
         $box->items()->update(['box_id' => null]);
+    
+        // Elimina la caja
         $box->delete();
-
+    
         return redirect(route('boxes.index'));
     }
 }
