@@ -64,7 +64,11 @@
                                         {{ $item->price }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
+                                        @if ($item->box)
                                         {{ $item->box->label }}
+                                        @else
+                                        No Box
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">

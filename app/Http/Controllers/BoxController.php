@@ -88,6 +88,6 @@ class BoxController extends Controller
         $box->items()->update(['box_id' => null]);
         $box->delete();
 
-        return redirect( route('boxes.index'));
+        return redirect(route('boxes.index'));
     }
 }

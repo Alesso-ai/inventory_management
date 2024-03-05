@@ -15,8 +15,6 @@ class Item extends Model
         'picture',
         'price',
         'box_id',
-
-
     ];
 
     public function box()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loan;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -10,10 +11,13 @@ class LoanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('loans.index', [
+            'loans' => Loan::all()
+        ]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
