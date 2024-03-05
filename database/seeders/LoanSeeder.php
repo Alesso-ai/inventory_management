@@ -26,11 +26,11 @@ class LoanSeeder extends Seeder
             for ($i = 0; $i < 2; $i++) {
                 // Obtén un item aleatorio
                 $item = $items->random();
-
-                $checkoutDate = Carbon::now()->subDays(rand(1, 60)); // Fecha de préstamo entre 1 y 60 días atrás
-                $dueDate = $checkoutDate->copy()->addDays(14); // La devolución se debía hacer 14 días después del préstamo
-                $returnedDate = $dueDate->copy()->addDays(rand(-2, 2)); // El item se devolvió entre 2 días antes y 2 días después de la fecha de devolución
-
+        
+                $checkoutDate = Carbon::now()->subDays(rand(1, 60))->toDateTimeString();
+                $dueDate = Carbon::parse($checkoutDate)->addDays(14)->toDateTimeString();
+                $returnedDate = Carbon::parse($dueDate)->addDays(rand(-2, 2))->toDateTimeString();
+        
                 Loan::create([
                     'user_id' => $user->id,
                     'item_id' => $item->id,

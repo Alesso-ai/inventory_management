@@ -66,4 +66,10 @@ class LoanController extends Controller
     {
         //
     }
+    
+    public function return(Loan $loan)
+    {
+        $loan->return();
+        return redirect()->route('loans.index');
+    }
 }
