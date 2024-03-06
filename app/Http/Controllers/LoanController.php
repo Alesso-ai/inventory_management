@@ -13,32 +13,28 @@ class LoanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        $user = Auth::user();
-        $loans = Loan::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
-        return view('loans.index', compact('loans'));
+
+        return view('loans.index', ['loans' => Loan::all()]);
     }
 
 
-    public function create()
-    {
-        
-    
-        $boxes = Box::all(); 
-    
-        return view('loans.create', compact('boxes'));
-    }
-
-    public function show(Loan $loan)
+    public function create(): View
     {
 
-        return view('loans.show', compact('loan'));
+
+        $boxes = Box::all();
+
+        return view('loans.create', compact('loans'));
     }
 
+    public function show(Loan $loan): View
+    {
 
-
+        return view('loans.show', compact('loans'));
+    }
 
     public function returnLoan(Loan $loan)
     {

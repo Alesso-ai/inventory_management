@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BoxSeeder::class,
             ItemSeeder::class,
-            LoanSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            LoanSeeder::class
         ]);
     }
 }

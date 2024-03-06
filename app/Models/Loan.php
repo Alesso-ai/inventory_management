@@ -15,8 +15,6 @@ class Loan extends Model
         'checkout_date',
         'due_date',
         'returned_date',
-        'return_date', 
-        'returned',
     ];
 
     public function user()
