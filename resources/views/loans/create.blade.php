@@ -14,7 +14,7 @@
                         <div class="p-4">
                             <label for="item_id" class="block font-medium text-white">Item</label>
                            
-                            <select name="item_id" id="item_id" class="form-input">
+                            <select name="item_id" id="item_id" class="form-input text-black">
                                 <option value="{{ $item_id->id }}">{{ $item_id->name }}</option>
                                 @foreach ($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="p-4">
                             <label for="location" class="block font-medium text-white">Fecha de devolucion esperada</label>
-                            <input type="date" name="due_date" id="due_date" class="form-input">
+                            <input type="date" name="due_date" id="due_date" class="form-input text-black">
                         </div>
          
                         <!-- Submit button -->
