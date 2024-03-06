@@ -41,7 +41,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-           //name description picture price box_id
+            //name description picture price box_id
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -49,21 +49,19 @@ class ItemController extends Controller
             'box_id' => 'nullable|exists:boxes,id',
         ]);
 
-        if($request->hasFile('picture')){
-           $validated ['picture'] = $request->file('picture')->store('public/photos');
+        if ($request->hasFile('picture')) {
+            $validated['picture'] = $request->file('picture')->store('public/photos');
         }
 
         Item::create($validated);
 
-        return redirect( route('items.index'));
-      
-
+        return redirect(route('items.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Item $item):View
+    public function show(Item $item): View
     {
 
         return view('items.show', [
@@ -74,7 +72,7 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Item $item):View
+    public function edit(Item $item): View
     {
 
         return view('items.edit', [
@@ -106,15 +104,19 @@ class ItemController extends Controller
 
         $item->update($validated);
 
-        return redirect( route('items.index'));
-        
+        return redirect(route('items.index'));
     }
 
-   
+
     public function destroy(Item $item)
     {
         //destroy
         $item->delete();
         return redirect()->route('items.index');
     }
+
+    
+
+    
+
 }
