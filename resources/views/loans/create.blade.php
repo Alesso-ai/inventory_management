@@ -10,52 +10,30 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('loans.store') }}" method="POST" enctype="multipart/form-data">
-
                         @csrf
-
-
-
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-100 text-sm font-bold mb-2">Name:</label>
-                            <input type="text" name="name" id="name"
-                                class="form-input rounded-md shadow-sm text-black">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="description"
-                                class="block text-gray-100 text-sm font-bold mb-2">Description:</label>
-
-                            <textarea name="description" id="description" class="form-textarea rounded-md shadow-sm text-black"></textarea>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="picture" class="block text-gray-100 text-sm font-bold mb-2">Picture:</label>
-
-
-                            <input type="file" name="picture" id="picture"
-                                class="form-input rounded-md shadow-sm text-black">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="price" class="block text-gray-100 text-sm font-bold mb-2">Price:</label>
-
-                            <input type="number" name="price" id="price"
-                                class="form-input rounded-md shadow-sm text-black">
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="box" class="block text-gray-100 text-sm font-bold mb-2">Box:</label>
-                            <select name="box_id" id="box" class="form-select rounded-md shadow-sm  text-black">
-                                @foreach ($boxes as $box)
-                                    <option value="{{ $loan->id }}">{{ $loan->label }}</option>
+                        <div class="p-4">
+                            <label for="item_id" class="block font-medium text-white">Item</label>
+                           
+                            <select name="item_id" id="item_id" class="form-input">
+                                <option value="{{ $item_id->id }}">{{ $item_id->name }}</option>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
+         
+                           
+         
+         
                         </div>
-
-                        <div class="flex items-center justify-end mt-4">
-                            <button type="submit"
-                                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create
-                                Item</button>
+                        <div class="p-4">
+                            <label for="location" class="block font-medium text-white">Fecha de devolucion esperada</label>
+                            <input type="date" name="due_date" id="due_date" class="form-input">
+                        </div>
+         
+                        <!-- Submit button -->
+                        <div class="flex justify-end p-4">
+                            <a href="{{ route('items.index') }}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="ml-2 btn btn-primary">Crear Prestamo</button>
                         </div>
                     </form>
                 </div>

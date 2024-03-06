@@ -71,7 +71,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4 flex flex-col">
                                         <a href="{{ route('items.show', $item->id) }}"
                                             class="text-indigo-600 hover:text-indigo-900">View</a>
                                         <a href="{{ route('items.edit', $item->id) }}"
@@ -83,6 +83,12 @@
                                             <button type="submit"
                                                 class="text-red-600 hover:text-red-900">Delete</button>
                                         </form>
+                                        @if($item->activeLoan())
+                                        <span class="text-gray-400">Ver Prestamo</span>
+                                        @else
+                                        <a href="{{ route('loans.create', $item->id) }}"
+                                            class="text-indigo-600 hover:text-indigo-900">Prestar</a>
+                                        @endif
                                     </td>
 
                                 </tr>

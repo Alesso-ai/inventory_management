@@ -1,10 +1,10 @@
+<!-- resources/views/loans/index.blade.php -->
+
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Historial de Préstamos') }}
-            </h2>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Historial de Préstamos') }}
+        </h2>
     </x-slot>
 
     <div class="py-12">
@@ -13,12 +13,10 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-semibold mb-4">Historial de Préstamos</h2>
 
-                    
-                    @if($loans->isEmpty())
+                    @if ($loans->isEmpty())
                         <p>No tienes préstamos registrados.</p>
                     @else
                         <table class="min-w-full divide-y divide-gray-200 dark:bg-gray-800">
-                            
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th scope="col"
@@ -35,13 +33,16 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        Fecha de Retorno
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Acciones
                                     </th>
                                 </tr>
                             </thead>
-                           
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($loans as $loan)
+                                @foreach ($loans as $loan)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loan->item->name }}
@@ -50,15 +51,18 @@
                                             {{ $loan->checkout_date }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $loan->returned ? $loan->return_date : 'Pendiente' }}
+                                            {{ $loan->due_date }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @if(!$loan->returned)
-                                                <form action="{{ route('loans.return', $loan->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="text-red-500 hover:underline">Devolver</button>
-                                                </form>
+                                            {{ $loan->returned_date ? $loan->returned_date : 'Pendiente' }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @if (!$loan->returned_date)
+                                            {{-- enlace a edit --}}
+                                                <a href="{{ route('loans.edit', $loan->id) }}"
+                                                    class="text-indigo-600 hover:text-indigo-900">Completar Prestamo</a>
+                                            @else 
+                                                <span class="text-gray-400">Completado</span>
                                             @endif
                                         </td>
                                     </tr>
